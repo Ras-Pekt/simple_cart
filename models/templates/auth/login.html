@@ -1,0 +1,59 @@
+{% extends "./layout.html" %}
+{% block content %}
+<div class="container mt-4 mb-3">
+	<div class="row justify-content-center">
+		<div class="col-md-8">
+			<div class="card">
+				<div class="card-body">
+					<form method="POST" action="">
+						{{ form.hidden_tag() }}
+						<fieldset class="form-group">
+							<legend class="border-bottom mb-4">Log In</legend>
+
+							<div class="mb-3">
+								{{ form.email.label(class="form-label") }}
+								{{ form.email(class="form-control", placeholder="Email Address") }}
+								{% if form.email.errors %}
+								<div class="invalid-feedback">
+									{% for error in form.email.errors %}
+									<span>{{ error }}</span>
+									{% endfor %}
+								</div>
+								{% endif %}
+							</div>
+
+							<div class="mb-3">
+								{{ form.password.label(class="form-label") }}
+								{{ form.password(class="form-control", placeholder="Password") }}
+								{% if form.password.errors %}
+								<div class="invalid-feedback">
+									{% for error in form.password.errors %}
+									<span>{{ error }}</span>
+									{% endfor %}
+								</div>
+								{% endif %}
+							</div>
+
+							<div class="form-check mb-3">
+								{{ form.remember(class="form-check-input") }}
+								{{ form.remember.label(class="form-check-label") }}
+							</div>
+
+						</fieldset>
+						<div class="mb-3">
+							{{ form.submit(class="btn btn-primary btn-sm") }}
+							<small class="text-muted ml-2">
+								<a href="{{ url_for('auth.request_password_reset') }}">Forgot Password?</a>
+							</small>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="border-top pt-3 text-center">
+	<small class="text-muted">Don't have an account? <a href="{{ url_for('auth.register') }}">Register</a></small>
+</div>
+{% endblock content %}
