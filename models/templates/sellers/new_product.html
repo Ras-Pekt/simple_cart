@@ -49,15 +49,38 @@
 							</div>
 
 							<div class="mb-2">
-								<label for="category" class="form-label">Category</label>
-								{{ form.category(class="form-select form-select-sm", placeholder="Select product
-								category") }}
+								{{ form.category.label(class="form-label") }}
 								{% if form.category.errors %}
-								<div class="invalid-feedback">
-									{% for error in form.category.errors %}
-									<span>{{ error }}</span>
-									{% endfor %}
-								</div>
+									<select name="category" class="form-control form-control-sm mb-2 is-invalid" required>
+										<option value="">Select Category</option>
+										<option value="Fashion and Apparel">Fashion and Apparel</option>
+										<option value="Electronics">Electronics</option>
+										<option value="Home and Furniture">Home and Furniture</option>
+										<option value="Health and Beauty">Health and Beauty</option>
+										<option value="Toys and Games">Toys and Games</option>
+										<option value="Sports and Fitness">Sports and Fitness</option>
+										<option value="Automotive">Automotive</option>
+										<option value="Food and Groceries">Food and Groceries</option>
+										<option value="Jewelry and Watches">Jewelry and Watches</option>
+									</select>
+									<div class="invalid-feedback">
+										{% for error in form.category.errors %}
+											<span>{{ error }}</span>
+										{% endfor %}
+									</div>
+								{% else %}
+									<select name="category" class="form-control form-control-sm mb-2" required>
+										<option value="">Select Category</option>
+										<option value="Fashion and Apparel">Fashion and Apparel</option>
+										<option value="Electronics">Electronics</option>
+										<option value="Home and Furniture">Home and Furniture</option>
+										<option value="Health and Beauty">Health and Beauty</option>
+										<option value="Toys and Games">Toys and Games</option>
+										<option value="Sports and Fitness">Sports and Fitness</option>
+										<option value="Automotive">Automotive</option>
+										<option value="Food and Groceries">Food and Groceries</option>
+										<option value="Jewelry and Watches">Jewelry and Watches</option>
+									</select>
 								{% endif %}
 							</div>
 
@@ -75,9 +98,8 @@
 							</div>
 
 							<div class="mb-2">
-								<label for="picture" class="form-label">Picture</label>
-								{{ form.picture(class="form-control form-control-sm", placeholder="Choose product
-								picture") }}
+								<label for="picture" class="form-label">{{ form.picture.label }}</label>
+								{{ form.picture(class="form-control form-control-sm", placeholder="Choose product picture", multiple=True) }}
 								{% if form.picture.errors %}
 								<div class="invalid-feedback">
 									{% for error in form.picture.errors %}
@@ -86,6 +108,9 @@
 								</div>
 								{% endif %}
 							</div>
+							
+							
+							
 
 							<div class="mt-3">
 								{{ form.submit(class="btn btn-outline-secondary btn-sm") }}
