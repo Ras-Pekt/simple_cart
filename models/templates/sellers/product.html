@@ -1,0 +1,69 @@
+{% extends "./layout.html" %}
+{% block content %}
+<!-- PRODUCT DETAILS -->
+<section class="md">
+    <div class="container">
+        <!-- product section -->
+        <div class="row mb-6 mb-md-7 mb-lg-9">
+            <div class="col-lg-5 text-center text-lg-start mb-1-9 mb-lg-0">
+                <!-- product left start -->
+                <img src="{{ url_for('static', filename='img/product_pics/' + product.picture) }}" alt="Product Image"
+                    width="300" height="300">
+
+                <!-- product left end -->
+            </div>
+            <div class="col-lg-7 ps-lg-2-3">
+                <div class="product-detail">
+                    <h2 class="mb-1">{{ product.name }}</h2>
+                    <p>{{ product.description }}</p>
+                    <p>Ksh {{ product.price }}</p>
+                    <p>{{ product.quantity }} remaining</p>
+                    {% if current_user.user_type == "seller" %}
+                    <p><a href="{{ url_for('products.update_product', product_id=product.id) }}">Edit</a></p>
+                    <p>
+                        <button type="button" class="btn btn-danger custom-btn m-1" data-bs-toggle="modal"
+                            data-bs-target="#deleteModal">Delete</button>
+                    </p>
+                    <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel"
+                        aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="deleteModalLabel">Delete Product</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    Are you sure you want to delete this product?
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary"
+                                        data-bs-dismiss="modal">Close</button>
+                                    <form method="POST"
+                                        action="{{ url_for('products.delete_product', product_id=product.id) }}">
+                                        <input type="hidden" name="product_id" value="{{ product.id }}">
+                                        <button type="submit" class="btn btn-danger">Delete</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% elif current_user.user_type == "buyer" %}
+                    <div class="row">
+                        <div class="col-6">
+                            <a href="{{ url_for('cart.add_to_cart', product_id=product.id) }}"
+                                class="btn btn-primary">Add to Cart</a>
+                        </div>
+                        <div class="col-6">
+                            <a href="{{ url_for('cart.view_cart') }}" class="btn btn-secondary">View Cart</a>
+                        </div>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        <!-- end product section -->
+    </div>
+</section>
+<!-- End of PRODUCT DETAILS -->
+{% endblock content %}
