@@ -34,15 +34,26 @@
 								{% endif %}
 							</div>
 
-							<div class="mb-3">
-								{{ form.usertype.label(class="form-label") }}
-								{{ form.usertype(class="form-select", placeholder="Select User Type") }}
+							<div class="form-group">
+								{{ form.usertype.label(class="form-control-label") }}
+							
 								{% if form.usertype.errors %}
-								<div class="invalid-feedback">
-									{% for error in form.usertype.errors %}
-									<span>{{ error }}</span>
-									{% endfor %}
-								</div>
+									<select name="usertype" id="usertype" class="form-control form-control-md mb-2 is-invalid" required>
+										<option value="">Select User Type</option>
+										<option value="buyer">Buyer</option>
+										<option value="seller">Seller</option>
+									</select>
+									<div class="invalid-feedback">
+										{% for error in form.usertype.errors %}
+											<span>{{ error }}</span>
+										{% endfor %}
+									</div>
+								{% else %}
+									<select name="usertype" id="usertype" class="form-control form-control-md mb-2" required>
+										<option value="">Select User Type</option>
+										<option value="buyer">Buyer</option>
+										<option value="seller">Seller</option>
+									</select>
 								{% endif %}
 							</div>
 
