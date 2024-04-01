@@ -3,8 +3,8 @@
 Product form module
 """
 from flask_wtf import FlaskForm
-from flask_wtf.file import FileField, FileAllowed
-from wtforms import StringField, SubmitField, TextAreaField, IntegerField, FloatField
+from flask_wtf.file import FileAllowed
+from wtforms import StringField, SubmitField, TextAreaField, IntegerField, FloatField, MultipleFileField
 from wtforms.validators import DataRequired, NumberRange
 
 
@@ -37,15 +37,13 @@ class NewProduct(FlaskForm):
         ]
     )
 
-    picture = FileField(
+    picture = MultipleFileField(
         "Upload Image(s) of the Product",
         validators=[
             DataRequired(),
-            FileAllowed([
-                "jpg",
-                "jpeg",
-                "png",
-            ])
+            FileAllowed(
+                ["jpg", "jpeg", "png"]
+            )
         ]
     )
 

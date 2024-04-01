@@ -5,9 +5,7 @@ Module to handle authentication logic
 from flask import Blueprint, render_template, url_for, flash, redirect, request
 from flask_login import login_user, current_user, logout_user
 from models import db, bcrypt
-from models.auth.auth_forms import (
-    Register, LogIn, RequestPasswordReset, ResetPassword
-)
+from models.auth.auth_forms import Register, LogIn, RequestPasswordReset, ResetPassword
 from models.User import User
 from models.main.utils import send_password_reset_email
 
@@ -71,6 +69,8 @@ def login():
     if form.validate_on_submit():
         existing_user = User.query.filter_by(email=email).first()
 
+        # add reload cart logic here
+
         if existing_user and bcrypt.check_password_hash(
             existing_user.password, password
         ):
@@ -97,6 +97,9 @@ def logout():
     Returns:
         redirect to home route
     """
+
+    # add store cart logic here
+
     logout_user()
     return redirect(url_for("main.home"))
 

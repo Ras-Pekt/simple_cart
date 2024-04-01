@@ -6,11 +6,20 @@
         <!-- product section -->
         <div class="row mb-6 mb-md-7 mb-lg-9">
             <div class="col-lg-5 text-center text-lg-start mb-1-9 mb-lg-0">
-                <!-- product left start -->
-                <img src="{{ url_for('static', filename='img/product_pics/' + product.picture) }}" alt="Product Image"
-                    width="300" height="300">
 
-                <!-- product left end -->
+				<div class="feature">
+					<div id="carouselExample" class="carousel slide mb-4" data-bs-ride="carousel" data-interval="5">
+						<div class="carousel-inner">
+							{% for picture in product.picture %}
+								<div class="carousel-item {% if loop.index == 1 %} active {% endif %}">
+									<img src="{{ url_for('static', filename='img/product_pics/' + picture) }}" alt="Product Image" width="400" height="400">
+								</div>
+							{% endfor %}
+						</div>
+					</div>
+				</div>
+
+
             </div>
             <div class="col-lg-7 ps-lg-2-3">
                 <div class="product-detail">

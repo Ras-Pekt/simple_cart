@@ -29,7 +29,12 @@ def new_product():
         name = form.name.data
         description = form.description.data
         price = form.price.data
-        picture = save_picture(form.picture.data, "product_pics", (300, 300))
+        # picture = save_picture(form.picture.data, "product_pics", (300, 300))
+        picture_filenames = []
+        for file in form.picture.data:
+            filename = save_picture(file, "product_pics", (300, 300))
+            picture_filenames.append(filename)
+
         category = form.category.data
         quantity = form.quantity.data
 
@@ -37,7 +42,8 @@ def new_product():
             name=name,
             description=description,
             price=price,
-            picture=picture,
+            # picture=picture,
+            picture=picture_filenames,
             category=category,
             quantity=quantity,
             user_id=current_user.id
@@ -91,7 +97,12 @@ def update_product(product_id):
         product.price = form.price.data
         product.category = form.category.data
         product.quantity = form.quantity.data
-        product.picture = save_picture(form.picture.data, "product_pics", (300, 300))
+        # product.picture = save_picture(form.picture.data, "product_pics", (300, 300))
+        picture_filenames = []
+        for file in form.picture.data:
+            filename = save_picture(file, "product_pics", (300, 300))
+            picture_filenames.append(filename)
+        product.picture = picture_filenames
 
         db.session.commit()
         flash("Product updated successfully", "success")
@@ -103,6 +114,7 @@ def update_product(product_id):
         form.price.data = product.price
         form.category.data = product.category
         form.quantity.data = product.quantity
+        form.picture.data = product.picture
 
     return render_template("sellers/new_product.html", title="Update Product", legend="Update Product", form=form)
 

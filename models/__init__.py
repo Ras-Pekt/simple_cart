@@ -37,7 +37,11 @@ def create_app(config=Config):
     mail.init_app(app)
 
     from models.auth.auth_routes import auth
+    from models.main.routes import main
+    from models.products.product_routes import products
 
     app.register_blueprint(auth)
+    app.register_blueprint(main)
+    app.register_blueprint(products)
 
     return app
