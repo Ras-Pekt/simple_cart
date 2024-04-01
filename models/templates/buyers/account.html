@@ -1,0 +1,131 @@
+{% extends "./layout.html" %}
+
+{% block content %}
+
+
+<div class="container mb-4 mt-3">
+	<div class="row justify-content-center">
+		<div class="col-md-8">
+			<div class="card">
+				<div class="card-body">
+					<form method="POST" action="">
+						{{ form.hidden_tag() }}
+						<fieldset class="form-group">
+							<legend class="border-bottom mb-4">Register</legend>
+
+							<div class="mb-3">
+								{{ form.fullname.label(class="form-label") }}
+								{{ form.fullname(class="form-control", placeholder="Full Name") }}
+								{% if form.fullname.errors %}
+								<div class="invalid-feedback">
+									{% for error in form.fullname.errors %}
+									<span>{{ error }}</span>
+									{% endfor %}
+								</div>
+								{% endif %}
+							</div>
+
+							<div class="mb-3">
+								{{ form.email.label(class="form-label") }}
+								{{ form.email(class="form-control", placeholder="Email Address") }}
+								{% if form.email.errors %}
+								<div class="invalid-feedback">
+									{% for error in form.email.errors %}
+									<span>{{ error }}</span>
+									{% endfor %}
+								</div>
+								{% endif %}
+							</div>
+
+							<div class="mb-3">
+								{{ form.usertype.label(class="form-label") }}
+								{{ form.usertype(class="form-select", placeholder="Select User Type") }}
+								{% if form.usertype.errors %}
+								<div class="invalid-feedback">
+									{% for error in form.usertype.errors %}
+									<span>{{ error }}</span>
+									{% endfor %}
+								</div>
+								{% endif %}
+							</div>
+
+							<div class="mb-3">
+								{{ form.password.label(class="form-label") }}
+								{{ form.password(class="form-control", placeholder="Password") }}
+								{% if form.password.errors %}
+								<div class="invalid-feedback">
+									{% for error in form.password.errors %}
+									<span>{{ error }}</span>
+									{% endfor %}
+								</div>
+								{% endif %}
+							</div>
+
+							<div class="mb-3">
+								{{ form.confirm_password.label(class="form-label") }}
+								{{ form.confirm_password(class="form-control", placeholder="Confirm Password") }}
+								{% if form.confirm_password.errors %}
+								<div class="invalid-feedback">
+									{% for error in form.confirm_password.errors %}
+									<span>{{ error }}</span>
+									{% endfor %}
+								</div>
+								{% endif %}
+							</div>
+
+							<div class="mb-3">
+								{{ form.phonenumber.label(class="form-label") }}
+								{{ form.phonenumber(class="form-control", placeholder="Phone Number") }}
+								{% if form.phonenumber.errors %}
+								<div class="invalid-feedback">
+									{% for error in form.phonenumber.errors %}
+									<span>{{ error }}</span>
+									{% endfor %}
+								</div>
+								{% endif %}
+							</div>
+
+						</fieldset>
+						<div class="mb-3">
+							{{ form.submit(class="btn btn-primary") }}
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<div class="container">
+	<h1>Welcome, {{ current_user.fullname }}</h1>
+	<p>Manage your account.</p>
+
+	<div class="row">
+		<div class="col-md-6">
+			<h2>Account Details</h2>
+			<p><strong>Email:</strong> {{ current_user.email }}</p>
+			<p><strong>Phone Number:</strong> {{ current_user.phone_number }}</p>
+			<p><strong>Account Type:</strong> {{ current_user.user_type | title }}</p>
+		</div>
+		<div class="col-md-6">
+			<h2>Change Password</h2>
+			<form action="/sellers/account" method="post">
+				<div class="mb-3">
+					<label for="password" class="form-label">Enter Old Password:</label>
+					<input type="password" class="form-control" id="password" name="password">
+				</div>
+				<div class="mb-3">
+					<label for="password" class="form-label">New Password:</label>
+					<input type="password" class="form-control" id="password" name="password">
+				</div>
+				<div class="mb-3">
+					<label for="password" class="form-label">Confirm New Password:</label>
+					<input type="password" class="form-control" id="password" name="password">
+				</div>
+				<button type="submit" class="btn btn-primary">Change Password</button>
+			</form>
+		</div>
+	</div>
+</div>
+{% endblock %}
