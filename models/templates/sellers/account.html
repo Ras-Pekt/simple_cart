@@ -1,0 +1,27 @@
+{% extends "./layout.html" %}
+
+{% block content %}
+<div class="container">
+	<h1>Welcome, {{ current_user.fullname }}</h1>
+	<p>Manage your account details here:</p>
+
+	<div class="row">
+		<div class="col-md-6">
+			<h2>Change Password</h2>
+			<form action="/sellers/account" method="post">
+				<div class="mb-3">
+					<label for="password" class="form-label">New Password:</label>
+					<input type="password" class="form-control" id="password" name="password">
+				</div>
+				<button type="submit" class="btn btn-primary">Change Password</button>
+			</form>
+		</div>
+		<div class="col-md-6">
+			<h2>Account Details</h2>
+			<p><strong>Email:</strong> {{ current_user.email }}</p>
+			<p><strong>Phone Number:</strong> {{ current_user.phone_number }}</p>
+			<p><strong>Account Type:</strong> {{ current_user.user_type }}</p>
+		</div>
+	</div>
+</div>
+{% endblock %}
