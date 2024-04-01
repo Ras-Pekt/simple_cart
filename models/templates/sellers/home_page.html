@@ -1,0 +1,26 @@
+{% extends "./layout.html" %}
+{% block content %}
+<!-- PRODUCT GRID -->
+<section class="md" style="margin-top: -10px;">
+	<div class="container">
+		<div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+			{% for product in products %}
+			<div class="col">
+				<div class="card h-100">
+					<img src="{{ url_for('static', filename='img/product_pics/' + product.picture) }}"
+						class="card-img-top img-fluid" alt="Product Image">
+					<div class="card-body">
+						<h5 class="card-title">{{ product.name }}</h5>
+						<p class="card-text">{{ product.description }}</p>
+						<p class="card-text">Ksh {{ product.price }}</p>
+					</div>
+					<div class="card-footer bg-light d-flex justify-content-between align-items-center">
+						<a href="/product/{{ product.id }}" class="btn btn-primary btn-lg">View</a>
+					</div>
+				</div>
+			</div>
+			{% endfor %}
+		</div>
+	</div>
+</section>
+{% endblock content %}
