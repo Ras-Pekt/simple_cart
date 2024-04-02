@@ -17,6 +17,25 @@
 	<link rel="stylesheet" href="{{ url_for('static', filename='styles/rev_slider/navigation.css') }}">
 	<link href="{{ url_for('static', filename='styles/styles.css') }}" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/main.css') }}">
+
+	<style>
+		.et-search-field {
+			padding: 8px 12px;
+			border: 1px solid #ccc;
+			border-radius: 5px;
+			font-family: Arial, sans-serif;
+		}
+
+		.search-btn {
+			background-color: #808080;
+			color: white;
+			padding: 8px 12px;
+			border: none;
+			cursor: pointer;
+			border-radius: 5px;
+		}
+
+	</style>
 </head>
 
 <body>
@@ -28,6 +47,29 @@
 				<span class="navbar-toggler-icon"></span>
 			</button>
 			<div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+
+				<form role="search" method="get" id="et-search-form" action="" style="display: none; margin-right: 20px;">
+					<input id="searchBox" type="search" class="et-search-field" placeholder="Search the site…" aria-label="Search through site content" />
+					<button class="search-btn" id="searchButton" type="submit">Search</button>
+				</form>
+				<span id="et_search_icon" style="cursor: pointer; margin-right: 20px;">🔍</span>
+				
+				<script>
+					document.getElementById("et_search_icon").addEventListener("click", function() {
+						document.getElementById("et-search-form").style.display = "block";
+						document.getElementById("et_search_icon").style.display = "none";
+					});
+
+					button = document.getElementById("searchButton")
+					input = document.getElementById("searchBox")
+					button.disabled = true;
+					input.addEventListener("input", function() {
+					if (input.value.length > 0) {
+						button.disabled = false;
+					}
+					});
+				</script>
+
 				<ul class="navbar-nav">
 					{% if current_user.is_authenticated %}
 
