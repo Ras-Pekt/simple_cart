@@ -1,0 +1,62 @@
+{% extends "./layout.html" %}
+
+{% block content %}
+
+<section class="md">
+	<div class="container">
+		{% if cart_items %}
+			<div class="row">
+				<!-- product table -->
+				<div class="col-12 shop-cart-table">
+					<table class="table shop-cart text-center">
+						<colgroup>
+							<col width="auto">
+							<col width="auto">
+							<col width="auto">
+							<col width="auto">
+						</colgroup>
+						<thead>
+							<tr>
+								<th>Product Name</th>
+								<th>Product Price</th>
+								<th>Product Quantity</th>
+							</tr>
+						</thead>
+						<tbody>
+							{% for id, item in cart_items.items() %}
+							<tr>
+								<td>{{ item.name }}</td>
+								<td>Ksh {{ item.price }}</td>
+								<td>{{ item.quantity }}</td>
+								<td>
+									<a href="{{ url_for('cart.remove_from_cart', product_id=id) }}">Remove from Cart</a>
+								</td>
+							</tr>
+							{% endfor %}
+						</tbody>
+					</table>
+				</div>
+				<!-- end product table -->
+				<!-- button set -->
+				<div class="col-12 border-bottom py-1-9 py-lg-2-3 mb-3 mb-md-4 mb-lg-0">
+					<h3>The Total Price is Ksh {{ session['total_price_' + current_user.id] }}</h3>
+					<div class="button-group">
+						<button class="butn-style2 small bg-color" onclick="window.location.href='{{ url_for('cart.checkout') }}'">Checkout</button>
+						<button class="butn-style2 small bg-color" onclick="window.location.href='{{ url_for('cart.clear_cart') }}'">Clear Cart</button>
+					</div>
+				</div>
+				<!-- end button set -->
+			</div>
+		{% else %}
+			<div class="row">
+				<div class="col-12">
+					<h3>Your cart is empty!</h3>
+					<p>It looks like you haven't added anything to your cart yet. Let's start your shopping journey by exploring our wide range of products.</p>
+					<p>Click the button below to head back to our homepage and discover the various products waiting for you.</p>
+					<a href="{{ url_for('main.home') }}" class="btn btn-primary">Start Shopping</a>
+				</div>
+			</div>		
+		{% endif %}
+	</div>
+</section>
+{% endblock content %}

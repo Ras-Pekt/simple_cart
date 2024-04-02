@@ -1,0 +1,49 @@
+{% extends "./layout.html" %}
+
+{% block content %}
+
+<section class="md">
+	<div class="container">
+		{% if orders %}
+			<div class="row">
+				<!-- purchase history table -->
+				<div class="col-12 shop-cart-table">
+					<table class="table shop-cart text-center">
+						<colgroup>
+							<col width="auto">
+							<col width="auto">
+							<col width="auto">
+							<col width="auto">
+						</colgroup>
+						<thead>
+							<tr>
+								<th>Product Name</th>
+								<th>Product Price</th>
+								<th>Product Quantity</th>
+							</tr>
+						</thead>
+						<tbody>
+							{% for order in orders %}
+							<tr>
+								<td>{{ order.name }}</td>
+								<td>{{ order.price }}</td>
+								<td>{{ order.quantity }}</td>
+							</tr>
+							{% endfor %}
+						</tbody>
+					</table>
+				</div>
+			</div>
+		{% else %}
+			<div class="row">
+				<div class="col-12">
+					<h3>Your Purchase History is empty!</h3>
+					<p>It looks like you haven't purchased anything from our site yet. Let's start your shopping journey by exploring our wide range of products.</p>
+					<p>Click the button below to head back to our homepage and discover the various products waiting for you.</p>
+					<a href="{{ url_for('main.home') }}" class="btn btn-primary">Start Shopping</a>
+				</div>
+			</div>		
+		{% endif %}
+	</div>
+</section>
+{% endblock content %}
