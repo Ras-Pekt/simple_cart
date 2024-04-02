@@ -9,7 +9,7 @@
 				<div class="product-grid">
 					<div class="product-img">
 						<a href="/product/{{ product.id }}">
-							<img src="{{ url_for('static', filename='img/product_pics/' + product.picture) }}"
+							<img src="{{ url_for('static', filename='img/product_pics/' + product.picture[0]) }}"
 								alt="Product Image" width="300" height="300">
 						</a>
 					</div>

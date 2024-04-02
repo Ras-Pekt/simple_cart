@@ -39,9 +39,13 @@ def create_app(config=Config):
     from models.auth.auth_routes import auth
     from models.main.routes import main
     from models.products.product_routes import products
-
+    from models.cart.cart_routes import cart
+    from models.orders.order_routes import orders
+    
     app.register_blueprint(auth)
     app.register_blueprint(main)
     app.register_blueprint(products)
+    app.register_blueprint(cart)
+    app.register_blueprint(orders)
 
     return app

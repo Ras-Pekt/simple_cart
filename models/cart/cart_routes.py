@@ -4,16 +4,19 @@ Module to handle cart logic
 """
 
 from flask import Blueprint, session, render_template, flash, url_for, redirect
-from flask_login import current_user
+from flask_login import current_user, login_required
 from models import db
 from models.Cart import Cart
-from models.main.utils import adjust_cart
+from models.main.utils import adjust_cart, role_required
+from models.Order import Order
 from models.Product import Product
 
 cart = Blueprint("cart", __name__)
 
 
 @cart.route("/cart")
+@login_required
+@role_required("buyer")
 def view_cart():
     """
     View cart items route
@@ -26,6 +29,8 @@ def view_cart():
 
 
 @cart.route("/add_to_cart/<string:product_id>")
+@login_required
+@role_required("buyer")
 def add_to_cart(product_id):
     """
     Add product to cart route
@@ -54,6 +59,8 @@ def add_to_cart(product_id):
 
 
 @cart.route("/remove_from_cart/<string:product_id>")
+@login_required
+@role_required("buyer")
 def remove_from_cart(product_id):
     """
     Removes product from cart route
@@ -77,6 +84,8 @@ def remove_from_cart(product_id):
 
 
 @cart.route("/clear_cart")
+@login_required
+@role_required("buyer")
 def clear_cart():
     """
     Clears cart route
@@ -89,6 +98,8 @@ def clear_cart():
 
 
 @cart.route("/checkout")
+@login_required
+@role_required("buyer")
 def checkout():
     """
     Checkout route
@@ -112,7 +123,23 @@ def checkout():
         db.session.commit()
         
     # add to order table
-    
+    for key, value in cart_items.items():
+        product_id = key
+        name = value.get("name")
+        price = value.get("price")
+        quantity = value.get("quantity")
+        user_id = current_user.id
+
+        new_order = Order(
+            product_id=product_id,
+            name=name,
+            price=price,
+            quantity=quantity,
+            user_id=user_id
+        )
+
+        db.session.add(new_order)
+        db.session.commit()
     
 
     # delete cart items from cart table
