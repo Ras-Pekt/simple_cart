@@ -11,25 +11,25 @@ To get started with Simple Cart, follow these steps:
 1. Clone the repository:
 
 ```
-	git clone https://github.com/Ras-Pekt/simple_cart.git
+git clone https://github.com/Ras-Pekt/simple_cart.git
 ```
 
 2. Navigate to the cloned repository:
 
 ```
-	cd simple_cart
+cd simple_cart
 ```
 
 3. Install all dependencies by running the [requirements.txt](requirements.txt) file::
 
 ```
-	pip install -r requirements.txt
+pip install -r requirements.txt
 ```
 
-4. Start the web app by running the app.py file:
+4. Start the web app by running the [app.py](app.py) file:
 
 ```
-	python app.py
+python app.py
 ```
 
 ## Usage
@@ -72,13 +72,13 @@ Users can choose to register as either a seller or a buyer.
 
 For any inquiries or support, please contact us at:
 
-Name: Wanjang'i Gituku
+Wanjang'i Gituku
 
 - Email: [Wanjang'i Gituku](mailto:wanjangi.gituku@gmail.com)
 - Github: [Ras-Pekt](https://github.com/Ras-Pekt/)
 - X: [@WanjangiG](https://twitter.com/WanjangiG)
 
-Name: Lavender Anyango
+Lavender Anyango
 
 - Email: [Lavender Anyango](mailto:lavenderanyango9@gmail.com)
 - Github: [Ven8462](https://github.com/ven8462/)
