@@ -20,7 +20,8 @@ def home():
         render home template
     """
     if not current_user.is_authenticated:
-        return render_template("home_page.html")
+        products = Product.query.order_by(Product.date_posted.desc()).all()
+        return render_template("home_page.html", products=products)
     elif current_user.user_type == "seller":
         products = Product.query.filter_by(user_id=current_user.id).order_by(Product.date_posted.desc()).all()
         return render_template("sellers/home_page.html", title="Sellers", products=products)
@@ -50,16 +51,16 @@ def search():
     """search functionality route"""
     search_term = request.args.get("search")
 
-    if current_user.user_type == "seller":
-        products = Product.query.filter(Product.name.like(f"%{search_term}%"), Product.user_id == current_user.id).all()
-        if products is None:
-            return render_template("sellers/search_results.html", title="Search Results", products=[])
-        return render_template("sellers/search_results.html", title="Search Results", products=products)
-    else:
+    if not current_user.is_authenticated or current_user.user_type == "buyer":
         products = Product.query.filter(Product.name.like(f"%{search_term}%")).all()
         if products is None:
             return render_template("buyers/search_results.html", title="Search Results", products=[])
         return render_template("buyers/search_results.html", title="Search Results", products=products)
+    elif current_user.user_type == "seller":
+        products = Product.query.filter(Product.name.like(f"%{search_term}%"), Product.user_id == current_user.id).all()
+        if products is None:
+            return render_template("sellers/search_results.html", title="Search Results", products=[])
+        return render_template("sellers/search_results.html", title="Search Results", products=products)
 
 
 @main.route('/change-password', methods=['POST'])

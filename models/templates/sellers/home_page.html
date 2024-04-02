@@ -15,7 +15,7 @@
 						<p class="card-text">Ksh {{ product.price }}</p>
 					</div>
 					<div class="card-footer bg-light d-flex justify-content-between align-items-center">
-						<a href="/product/{{ product.id }}" class="btn btn-primary btn-lg">View</a>
+						<a href="{{ url_for('products.product', product_id=product.id) }}" class="btn btn-primary btn-lg">View</a>
 					</div>
 				</div>
 			</div>

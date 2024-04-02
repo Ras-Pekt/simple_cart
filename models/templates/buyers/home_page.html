@@ -8,18 +8,18 @@
 			<div class="col-11 col-sm-6 col-xl-4 mb-1-9">
 				<div class="product-grid">
 					<div class="product-img">
-						<a href="/product/{{ product.id }}">
+						<a href="{{ url_for('products.product', product_id=product.id) }}">
 							<img src="{{ url_for('static', filename='img/product_pics/' + product.picture[0]) }}"
 								alt="Product Image" width="300" height="300">
 						</a>
 					</div>
 					<div class="product-description">
-						<h3><a href="/product/{{ product.id }}">{{ product.name }}</a></h3>
+						<h3><a href="{{ url_for('products.product', product_id=product.id) }}">{{ product.name }}</a></h3>
 						<h4 class="price">Ksh {{ product.price }}</h4>
 					</div>
 					<div class="product-buttons">
 						<ul class="ps-0">
-							<li><a href="/product/{{ product.id }}" class="btn-link" title="View Product">View</a></li>
+							<li><a href="{{ url_for('products.product', product_id=product.id) }}" class="btn-link" title="View Product">View</a></li>
 							<li><a href="{{ url_for('cart.add_to_cart', product_id=product.id) }}" class="butn-style2" title="Add to Cart">Add to Cart</a></li>
 
 						</ul>
