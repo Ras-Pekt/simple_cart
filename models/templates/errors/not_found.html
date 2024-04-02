@@ -1,10 +1,13 @@
 {% extends "./layout.html" %}
 {% block content %}
-	<div class="content-section">
-		<h1>Page Not Found! (404)</h1>
-		<p>
-			This page does not exist!
-			Please confirm you've typed the correct url
-		</p>
+	<div class="container">
+		<div class="col-12">
+			<h3>Page Not Found! (404)</h3>
+			<p>
+				This page does not exist!
+				Please confirm you've typed the correct url
+			</p>
+			<a href="{{ url_for('main.home') }}" class="btn btn-primary">Home</a>
+		</div>
 	</div>
 {% endblock content %}
