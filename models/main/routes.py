@@ -2,7 +2,7 @@
 """
 Module to handle main logic
 """
-from flask import Blueprint, render_template
+from flask import Blueprint, render_template, request
 from flask_login import current_user
 from models.Product import Product
 
@@ -41,3 +41,20 @@ def account():
         return render_template("sellers/account.html", title=current_user.fullname)
     elif current_user.user_type == "buyer":
         return render_template("buyers/account.html", title=current_user.fullname)
+
+
+@main.route("/search")
+def search():
+    """search functionality route"""
+    search_term = request.args.get("search")
+
+    if current_user.user_type == "seller":
+        products = Product.query.filter(Product.name.like(f"%{search_term}%"), Product.user_id == current_user.id).all()
+        if products is None:
+            return render_template("sellers/search_results.html", title="Search Results", products=[])
+        return render_template("sellers/search_results.html", title="Search Results", products=products)
+    else:
+        products = Product.query.filter(Product.name.like(f"%{search_term}%")).all()
+        if products is None:
+            return render_template("buyers/search_results.html", title="Search Results", products=[])
+        return render_template("buyers/search_results.html", title="Search Results", products=products)
