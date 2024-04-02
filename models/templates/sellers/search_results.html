@@ -1,0 +1,41 @@
+{% extends "./layout.html" %}
+{% block content%}
+<!-- PRODUCT GRID -->
+<section class="md" style="margin-top: -10px;">
+	<div class="container">
+		{% if products %}
+			<div class="row justify-content-center">
+				{% for product in products %}
+				<div class="col-11 col-sm-6 col-xl-4 mb-1-9">
+					<div class="product-grid">
+						<div class="product-img">
+							<a href="/product/{{ product.id }}">
+								<img src="{{ url_for('static', filename='img/product_pics/' + product.picture[0]) }}"
+									alt="Product Image" width="300" height="300">
+							</a>
+						</div>
+						<div class="product-description">
+							<h3><a href="/product/{{ product.id }}">{{ product.name }}</a></h3>
+							<h4 class="price">Ksh {{ product.price }}</h4>
+						</div>
+						<div class="product-buttons">
+							<ul class="ps-0">
+								<li><a href="/product/{{ product.id }}" class="btn-link" title="View Product">View</a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+				{% endfor %}
+			</div>
+		{% else %}
+			<div class="row">
+				<div class="col-12">
+					<h3>No Products Found!</h3>
+					<p>No products march your search terms.</p>
+					<a href="{{ url_for('products.new_product') }}" class="btn btn-primary">Add More Products</a>
+				</div>
+			</div>	
+		{% endif %}
+	</div>
+</section>
+{% endblock content %}

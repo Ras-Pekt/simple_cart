@@ -28,7 +28,7 @@
                     <p>Ksh {{ product.price }}</p>
                     <p>{{ product.quantity }} remaining</p>
                     {% if current_user.user_type == "seller" %}
-                    <p><a href="{{ url_for('products.update_product', product_id=product.id) }}">Edit</a></p>
+                    <p><a class="btn btn-info custom-btn m-1" href="{{ url_for('products.update_product', product_id=product.id) }}">Edit</a></p>
                     <p>
                         <button type="button" class="btn btn-danger custom-btn m-1" data-bs-toggle="modal"
                             data-bs-target="#deleteModal">Delete</button>
