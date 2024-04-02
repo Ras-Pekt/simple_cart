@@ -8,7 +8,7 @@
 	<div class="row">
 		<div class="col-md-6">
 			<h2>Change Password</h2>
-			<form action="/sellers/account" method="post">
+			<form action="{{ url_for('main.account') }}" method="post">
 				<div class="mb-3">
 					<label for="password" class="form-label">New Password:</label>
 					<input type="password" class="form-control" id="password" name="password">

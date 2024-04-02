@@ -2,9 +2,11 @@
 """
 Module to handle main logic
 """
-from flask import Blueprint, render_template, request
+from flask import Blueprint, render_template, request, flash, redirect, url_for
 from flask_login import current_user
+from models import bcrypt, db
 from models.Product import Product
+from models.User import User
 
 main = Blueprint("main", __name__)
 
@@ -20,10 +22,10 @@ def home():
     if not current_user.is_authenticated:
         return render_template("home_page.html")
     elif current_user.user_type == "seller":
-        products = Product.query.filter_by(user_id=current_user.id).all()
+        products = Product.query.filter_by(user_id=current_user.id).order_by(Product.date_posted.desc()).all()
         return render_template("sellers/home_page.html", title="Sellers", products=products)
     elif current_user.user_type == "buyer":
-        products = Product.query.all()
+        products = Product.query.order_by(Product.date_posted.desc()).all()
         return render_template("buyers/home_page.html", title="Buyers", products=products)
 
 
@@ -58,3 +60,30 @@ def search():
         if products is None:
             return render_template("buyers/search_results.html", title="Search Results", products=[])
         return render_template("buyers/search_results.html", title="Search Results", products=products)
+
+
+@main.route('/change-password', methods=['POST'])
+def change_password():
+    user = User.query.get(current_user.id)
+    
+    old_password = request.form.get('old_password')
+    new_password = request.form.get('new_password')
+    confirm_password = request.form.get('confirm_password')
+
+    if not current_user.is_authenticated:
+        flash('You must be logged in to change password', 'danger')
+        return redirect(url_for('main.home'))
+
+    if not bcrypt.check_password_hash(user.password, old_password):
+        flash('Old password is incorrect', 'danger')
+        return redirect(url_for('main.account'))
+
+    if new_password != confirm_password:
+        flash('New passwords do not match', 'danger')
+        return redirect(url_for('main.account'))
+
+    hash_pwd = bcrypt.generate_password_hash(new_password).decode("utf-8")
+    user.password = hash_pwd
+    db.session.commit()
+    flash('Password changed successfully', 'success')
+    return redirect(url_for('main.account'))

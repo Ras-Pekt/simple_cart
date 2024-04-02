@@ -48,8 +48,8 @@
 			</button>
 			<div class="collapse navbar-collapse justify-content-end" id="navbarNav">
 
-				<form role="search" method="get" id="et-search-form" action="" style="display: none; margin-right: 20px;">
-					<input id="searchBox" type="search" class="et-search-field" placeholder="Search the site…" aria-label="Search through site content" />
+				<form role="search" method="get" id="et-search-form" action="{{ url_for('main.search') }}" style="display: none; margin-right: 20px;">
+					<input id="searchBox" type="search" name="search" class="et-search-field" placeholder="Search the site…" aria-label="Search through site content" />
 					<button class="search-btn" id="searchButton" type="submit">Search</button>
 				</form>
 				<span id="et_search_icon" style="cursor: pointer; margin-right: 20px;">🔍</span>
