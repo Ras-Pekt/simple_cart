@@ -26,7 +26,16 @@ cd simple_cart
 pip install -r requirements.txt
 ```
 
-4. Start the web app by running the [app.py](app.py) file:
+4. Setup environment variables by creating an .env file, at the root of the simple_cart directory, with the following environment variables:
+
+```
+SECRET_KEY=<APP_SECRET_KEY>
+SQLALCHEMY_DATABASE_URI=<DATABASE_URI>
+MAIL_USERNAME=<EMAIL_ADDRESS>
+MAIL_PASSWORD=<EMAIL_PASSWORD> # confirm with your email provider on how to set this up for your email address
+```
+
+5. Start the web app by running the [app.py](app.py) file:
 
 ```
 python app.py
