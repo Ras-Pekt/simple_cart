@@ -10,30 +10,34 @@
 						<fieldset class="form-group">
 							<legend class="border-bottom mb-4">Register</legend>
 
-							<div class="mb-3">
+							<div class="form-group">
 								{{ form.fullname.label(class="form-label") }}
-								{{ form.fullname(class="form-control", placeholder="Full Name") }}
 								{% if form.fullname.errors %}
-								<div class="invalid-feedback">
-									{% for error in form.fullname.errors %}
-									<span>{{ error }}</span>
-									{% endfor %}
-								</div>
+									{{ form.fullname(class="form-control form-control-md mb-2 is-invalid", placeholder="Full Name") }}
+									<div class="invalid-feedback">
+										{% for error in form.fullname.errors %}
+											<span>{{ error }}</span>
+										{% endfor %}
+									</div>
+								{% else %}
+									{{ form.fullname(class="form-control form-control-md mb-2", placeholder="Full Name") }}
 								{% endif %}
 							</div>
 
-							<div class="mb-3">
+							<div class="form-group">
 								{{ form.email.label(class="form-label") }}
-								{{ form.email(class="form-control", placeholder="Email Address") }}
 								{% if form.email.errors %}
-								<div class="invalid-feedback">
-									{% for error in form.email.errors %}
-									<span>{{ error }}</span>
-									{% endfor %}
-								</div>
+									{{ form.email(class="form-control form-control-md mb-2 is-invalid", placeholder="Email") }}
+									<div class="invalid-feedback">
+										{% for error in form.email.errors %}
+											<span>{{ error }}</span>
+										{% endfor %}
+									</div>
+								{% else %}
+									{{ form.email(class="form-control form-control-md mb-2", placeholder="Email") }}
 								{% endif %}
 							</div>
-
+			
 							<div class="form-group">
 								{{ form.usertype.label(class="form-control-label") }}
 							
@@ -57,45 +61,51 @@
 								{% endif %}
 							</div>
 
-							<div class="mb-3">
+							<div class="form-group">
 								{{ form.password.label(class="form-label") }}
-								{{ form.password(class="form-control", placeholder="Password") }}
 								{% if form.password.errors %}
-								<div class="invalid-feedback">
-									{% for error in form.password.errors %}
-									<span>{{ error }}</span>
-									{% endfor %}
-								</div>
+									{{ form.password(class="form-control form-control-md mb-2 is-invalid", placeholder="Password") }}
+									<div class="invalid-feedback">
+										{% for error in form.password.errors %}
+											<span>{{ error }}</span>
+										{% endfor %}
+									</div>
+								{% else %}
+									{{ form.password(class="form-control form-control-md mb-2", placeholder="Password") }}
 								{% endif %}
 							</div>
 
-							<div class="mb-3">
+							<div class="form-group">
 								{{ form.confirm_password.label(class="form-label") }}
-								{{ form.confirm_password(class="form-control", placeholder="Confirm Password") }}
 								{% if form.confirm_password.errors %}
-								<div class="invalid-feedback">
-									{% for error in form.confirm_password.errors %}
-									<span>{{ error }}</span>
-									{% endfor %}
-								</div>
+									{{ form.confirm_password(class="form-control form-control-md mb-2 is-invalid", placeholder="Confirm Password") }}
+									<div class="invalid-feedback">
+										{% for error in form.confirm_password.errors %}
+											<span>{{ error }}</span>
+										{% endfor %}
+									</div>
+								{% else %}
+									{{ form.confirm_password(class="form-control form-control-md mb-2", placeholder="Confirm Password") }}
 								{% endif %}
 							</div>
 
-							<div class="mb-3">
+							<div class="form-group">
 								{{ form.phonenumber.label(class="form-label") }}
-								{{ form.phonenumber(class="form-control", placeholder="Phone Number") }}
 								{% if form.phonenumber.errors %}
-								<div class="invalid-feedback">
-									{% for error in form.phonenumber.errors %}
-									<span>{{ error }}</span>
-									{% endfor %}
-								</div>
+									{{ form.phonenumber(class="form-control form-control-md mb-2 is-invalid", placeholder="Phone Number") }}
+									<div class="invalid-feedback">
+										{% for error in form.phonenumber.errors %}
+											<span>{{ error }}</span>
+										{% endfor %}
+									</div>
+								{% else %}
+									{{ form.phonenumber(class="form-control form-control-md mb-2", placeholder="+Countrycode xxxxxxxxxx") }}
 								{% endif %}
 							</div>
-
+			
 						</fieldset>
-						<div class="mb-3">
-							{{ form.submit(class="btn btn-primary") }}
+						<div class="form-group mt-2">
+							{{ form.submit(class="btn btn-outline-secondary")}}
 						</div>
 					</form>
 				</div>

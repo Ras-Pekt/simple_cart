@@ -63,6 +63,7 @@ Users can choose to register as either a seller or a buyer.
 - Flask: Python web framework for backend logic.
 - Bootstrap: CSS framework for enhanced styling.
 - jQuery: JavaScript library for making the web app responsive.
+- SQlite: A relational database for data storage
 
 ## License
 

@@ -8,6 +8,7 @@ from flask_mail import Message
 from functools import wraps
 from models import mail
 from PIL import Image
+import phonenumbers
 from secrets import token_hex
 import os
 import uuid
@@ -130,3 +131,22 @@ def adjust_cart(cart_items, product_id, product):
         total_price += value.get("price") * value.get("quantity")
 
     return total_price
+
+
+def validate_phone_number(phone_number):
+    """
+    Validates a user's phone number
+
+    Args:
+        phone_number: user's phone number
+    Returns:
+        tuple: phone number and boolean value
+    """
+    try:
+        parsed_number = phonenumbers.parse(phone_number)
+        if phonenumbers.is_valid_number(parsed_number):
+            num = phonenumbers.format_number(parsed_number, phonenumbers.PhoneNumberFormat.INTERNATIONAL)
+            return (num, True)
+        return (False, False)
+    except phonenumbers.phonenumberutil.NumberParseException:
+        return (False, False)

@@ -4,6 +4,7 @@ Authentication forms module
 """
 
 from flask_wtf import FlaskForm
+from models.main.utils import validate_phone_number
 from models.User import User
 from wtforms import StringField, PasswordField, SubmitField, BooleanField
 from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError
@@ -77,6 +78,21 @@ class Register(FlaskForm):
         if existing_email:
             raise ValidationError(
                 "This email already has an account associated with it"
+            )
+    
+    def validate_phonenumber(self, phonenumber):
+        """
+        checks if the phone number is valid
+
+        Args:
+            phonenumber: phone number
+        Raises:
+            ValidationError: if phone number is invalid
+        """
+        _, is_valid = validate_phone_number(phonenumber.data)
+        if is_valid is False:
+            raise ValidationError(
+                "Please enter Phone number in the format: +Countrycode xxxxxxxxxx"
             )
 
 

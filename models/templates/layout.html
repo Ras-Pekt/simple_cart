@@ -18,6 +18,11 @@
 	<link href="{{ url_for('static', filename='styles/styles.css') }}" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/main.css') }}">
 
+	<link rel="apple-touch-icon" sizes="180x180" href="{{ url_for('static', filename='img/favicon/apple-touch-icon.png') }}">
+	<link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static', filename='img/favicon/favicon-32x32.png') }}">
+	<link rel="icon" type="image/png" sizes="16x16" href="{{ url_for('static', filename='img/favicon/favicon-16x16.png') }}">
+	<link rel="manifest" href="/site.webmanifest">
+
 	<style>
 		.et-search-field {
 			padding: 8px 12px;
@@ -127,19 +132,6 @@
 	<hr style="border: none; border-top: 1px solid #5f656d; margin-top: 20px; margin-bottom: 20px;">
 	<footer class="pt-0 classic-footer">
 		<div class="container">
-			<div class="row mt-n2-2">
-				<div class="col-lg-4 col-md-6 mt-2-2">
-					<h3>Contact Us</h3>
-					<ul class="list-style list-unstyled mb-2 ps-0">
-						<li>
-							<strong>Phone: </strong><span class="ps-1">(+44) 123 456 789</span>
-						</li>
-						<li>
-							<strong>Email: </strong><span class="ps-1">addyour@emailhere</span>
-						</li>
-					</ul>
-				</div>
-			</div>
 			<div>
 				<p style="text-align: center;">
 					Copyright &copy; <span id="currentYear"></span> Simple Cart
@@ -150,7 +142,6 @@
 				document.getElementById("currentYear").textContent = new Date().getFullYear();
 			</script>			
 		</div>
-
 	</footer>
 	
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
